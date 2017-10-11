@@ -4,6 +4,7 @@
         <transition name="panel-fade">
             <div class="panel-body" v-show="visible">
                 <slot name="image"/>
+                <slot name="remove-button" />
             </div>
         </transition>
     </div>

@@ -8,6 +8,13 @@
       <li class="photo-list-item" v-for="photo of photosWithFilter" v-bind:key="photo.titulo">
         <my-own-panel :title="photo.titulo">
           <responsive-image slot="image" :url="photo.url" :title="photo.titulo"/>
+          <my-own-button 
+            slot="remove-button" 
+            label="Remove" 
+            type="button" 
+            btnStyle="default"
+            :check="true" 
+            @activeButton="remove(photo)" />                              
         </my-own-panel>
       </li>
     </ul>
@@ -17,11 +24,13 @@
 <script>
 import Panel from '../shared/panel/Panel.vue';
 import ResponsiveImage from '../shared/responsive-image/ResponsiveImage.vue';
+import Button from '../shared/button/Button.vue';
 
 export default {
   components: {
     'my-own-panel': Panel,
-    'responsive-image': ResponsiveImage
+    'responsive-image': ResponsiveImage,
+    'my-own-button': Button
   },
   data() {
     return {
@@ -37,6 +46,11 @@ export default {
       } else {
         return this.photos;
       }
+    }
+  },
+  methods: {
+    remove(photo) {
+      alert('Remover ' + photo.titulo)
     }
   },
   created() {
