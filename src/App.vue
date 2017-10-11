@@ -1,62 +1,41 @@
 <template>
   <div class="body">
-    <h1 class="center">{{ title }}</h1>
+    <my-own-menu :routes="routes"/>
 
-    <ul class="photo-list">
-      <li class="photo-list-item" v-for="photo in photos" v-bind:key="photo.titulo">
-        <my-own-panel :title="photo.titulo">
-          <img slot="image" class="imagem-responsiva" :src="photo.url" :alt="photo.titulo">
-        </my-own-panel>
-      </li>
-    </ul>
+    <transition name="page">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
-
-import Panel from './components/shared/panel/Panel.vue';
+import Menu from './components/shared/menu/Menu.vue';
+import { routes } from './routes';
 
 export default {
   components: {
-    'my-own-panel': Panel
+    'my-own-menu': Menu
   },
   data() {
     return {
-      title: 'Alurapic!',
-      photos: []
+      routes
     }
-  },
-  created() {
-    this.$http.get('http://localhost:3000/v1/fotos')
-      .then(res => res.json())
-      .then(photos => {
-        this.photos = photos
-        console.log(photos)
-      }, err => console.log(err))
   }
 }
 </script>
 
 <style>
-.center {
-  text-align: center;
-}
-
 .body {
   font-family: Helvetica, sans-serift;
   margin: 0 auto;
   width: 96%;
 }
 
-.photo-list {
-  list-style: none;
+.page-enter-active, .page-leave-active {
+  transition: opacity .3s;
 }
 
-.photo-list .list-photo-item {
-  display: inline-block;
-}
-
-.imagem-responsiva {
-  width: 100%;
+.page-enter, .page-leave-active {
+  opacity: 0;
 }
 </style>
