@@ -7,7 +7,7 @@
     <ul class="photo-list">
       <li class="photo-list-item" v-for="photo of photosWithFilter" v-bind:key="photo.titulo">
         <my-own-panel :title="photo.titulo">
-          <responsive-image slot="image" :url="photo.url" :title="photo.titulo"/>
+          <responsive-image slot="image" :url="photo.url" :title="photo.titulo" v-my-transform="{increment: 35, animate: true}" />
           <my-own-button 
             slot="remove-button" 
             label="Remove" 

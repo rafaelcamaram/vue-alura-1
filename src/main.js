@@ -5,6 +5,8 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 import { routes } from './routes';
 
+import './directives/Transform';
+
 // Disponibiliza artefatos especializados
 // na realização de requisições assíncronas
 Vue.use(VueResource);
